@@ -13,7 +13,7 @@ class ContainerProvider implements ContainerProviderInterface
     /**
      * {@inheritdoc}
      */
-    public static function hydrate(Jarvis $container)
+    public function hydrate(Jarvis $container)
     {
         $container['twig'] = function ($container) {
             $config = array_merge(
