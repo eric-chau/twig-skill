@@ -31,5 +31,7 @@ class ContainerProvider implements ContainerProviderInterface
 
             return new \Twig_Environment(new \Twig_Loader_Filesystem($config['templates_paths']), $config);
         };
+
+        $container->lock('twig');
     }
 }
