@@ -29,7 +29,11 @@ class ContainerProvider implements ContainerProviderInterface
                 throw new \LogicException('Parameter `templates_paths` is missing to configure Twig.');
             }
 
-            return new \Twig_Environment(new \Twig_Loader_Filesystem($config['templates_paths']), $config);
+            $twig = new \Twig_Environment(new \Twig_Loader_Filesystem($config['templates_paths']), $config);
+
+            $twig->addGlobal('router', $container->router);
+
+            return $twig;
         };
 
         $container->lock('twig');
