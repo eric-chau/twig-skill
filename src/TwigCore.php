@@ -8,14 +8,14 @@ use Jarvis\Skill\DependencyInjection\ContainerProviderInterface;
 /**
  * @author Eric Chau <eriic.chau@gmail.com>
  */
-class ContainerProvider implements ContainerProviderInterface
+class TwigCore implements ContainerProviderInterface
 {
     /**
      * {@inheritdoc}
      */
     public function hydrate(Jarvis $container)
     {
-        $container['twig'] = function ($container) {
+        $container['twig'] = function (Jarvis $container) {
             $config = array_merge(
                 [
                     'auto_reload'      => true,
@@ -31,7 +31,7 @@ class ContainerProvider implements ContainerProviderInterface
 
             $twig = new \Twig_Environment(new \Twig_Loader_Filesystem($config['templates_paths']), $config);
 
-            $twig->addGlobal('router', $container->router);
+            $container->broadcast(TwigEvents::INIT_EVENT, new TwigEvent($twig));
 
             return $twig;
         };
