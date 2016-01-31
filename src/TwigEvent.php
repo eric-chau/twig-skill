@@ -11,6 +11,8 @@ use Jarvis\Skill\EventBroadcaster\SimpleEvent;
  */
 class TwigEvent extends SimpleEvent
 {
+    const READY_EVENT = 'twig.ready';
+
     private $twig;
 
     public function __construct(\Twig_Environment $twig)

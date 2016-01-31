@@ -31,7 +31,7 @@ class TwigCore implements ContainerProviderInterface
 
             $twig = new \Twig_Environment(new \Twig_Loader_Filesystem($config['templates_paths']), $config);
 
-            $container->broadcast(TwigEvents::INIT_EVENT, new TwigEvent($twig));
+            $container->broadcast(TwigEvent::READY_EVENT, new TwigEvent($twig));
 
             return $twig;
         };
