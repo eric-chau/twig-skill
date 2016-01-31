@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace Jarvis\Skill\Twig;
 
-use Jarvis\Skill\EventBroadcaster\SimpleEvent;
+use Jarvis\Skill\EventBroadcaster\PermanentEvent;
 
 /**
  * @author Eric Chau <eriic.chau@gmail.com>
  */
-class TwigEvent extends SimpleEvent
+class TwigEvent extends PermanentEvent
 {
     const READY_EVENT = 'twig.ready';
 
