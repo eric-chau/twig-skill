@@ -9,7 +9,7 @@ use Jarvis\Skill\EventBroadcaster\PermanentEvent;
 /**
  * @author Eric Chau <eriic.chau@gmail.com>
  */
-class TwigEvent extends PermanentEvent
+class TwigReadyEvent extends PermanentEvent
 {
     const READY_EVENT = 'twig.ready';
 
