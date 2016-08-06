@@ -13,16 +13,16 @@ class TwigCore implements ContainerProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function hydrate(Jarvis $container)
+    public function hydrate(Jarvis $jarvis)
     {
-        $container['twig'] = function (Jarvis $container) {
+        $jarvis['twig'] = function(Jarvis $jarvis) {
             $config = array_merge(
                 [
                     'auto_reload'      => true,
-                    'debug'            => $container->debug,
+                    'debug'            => $jarvis->debug,
                     'strict_variables' => true,
                 ],
-                $container->settings->get('twig', [])
+                $jarvis->settings->get('twig', [])
             );
 
             if (!isset($config['templates_paths'])) {
@@ -31,11 +31,11 @@ class TwigCore implements ContainerProviderInterface
 
             $twig = new \Twig_Environment(new \Twig_Loader_Filesystem($config['templates_paths']), $config);
 
-            $container->broadcast(TwigReadyEvent::READY_EVENT, new TwigReadyEvent($twig));
+            $jarvis->broadcast(TwigReadyEvent::READY_EVENT, new TwigReadyEvent($twig));
 
             return $twig;
         };
 
-        $container->lock('twig');
+        $jarvis->lock('twig');
     }
 }
