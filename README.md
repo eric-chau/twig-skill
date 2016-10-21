@@ -4,19 +4,21 @@ This skill is an integration of `Twig` into Jarvis micro-framework.
 
 ## Configuration options
 
-To pass options to Twig you must provide a `twig` settings key like this:
+To pass options to Twig you must add a 'twig' key in the 'extra' section:
 
 ```php
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $jarvis = new Jarvis\Jarvis([
-    'container_provider' => [
+    'providers' => [
         'Jarvis\Skill\Twig\ContainerProvider',
     ],
-    'twig' => [
-        'templates_paths' => '/path/to/templates',
+    'extra' => [
+        twig' => [
+            'templates_paths' => '/path/to/templates',
+        ],
     ],
 ]);
 ```
