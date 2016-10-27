@@ -16,21 +16,17 @@ class TwigCore implements ContainerProviderInterface
     public function hydrate(Jarvis $app)
     {
         $app['twig'] = function (Jarvis $app): \Twig_Environment {
-            $config = array_merge(
-                [
-                    'auto_reload'      => true,
-                    'debug'            => $app->debug,
-                    'strict_variables' => true,
-                ],
-                $app->settings->get('twig', [])
-            );
+            $settings = array_merge([
+                'auto_reload'      => true,
+                'debug'            => $app['debug'],
+                'strict_variables' => true,
+            ], (array) ($app['twig.settings'] ?? []));
 
-            if (!isset($config['templates_paths'])) {
+            if (!isset($settings['templates_paths'])) {
                 throw new \LogicException('Parameter `templates_paths` is missing to configure Twig.');
             }
 
-            $twig = new \Twig_Environment(new \Twig_Loader_Filesystem($config['templates_paths']), $config);
-
+            $twig = new \Twig_Environment(new \Twig_Loader_Filesystem($settings['templates_paths']), $settings);
             $app->broadcast(TwigReadyEvent::READY_EVENT, new TwigReadyEvent($twig));
 
             return $twig;
