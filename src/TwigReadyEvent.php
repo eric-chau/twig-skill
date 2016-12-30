@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Jarvis\Skill\Twig;
 
@@ -13,6 +13,9 @@ class TwigReadyEvent extends PermanentEvent
 {
     const READY_EVENT = 'twig.ready';
 
+    /**
+     * @var \Twig_Environment
+     */
     private $twig;
 
     public function __construct(\Twig_Environment $twig)
@@ -20,7 +23,7 @@ class TwigReadyEvent extends PermanentEvent
         $this->twig = $twig;
     }
 
-    public function twig()
+    public function twig(): \Twig_Environment
     {
         return $this->twig;
     }

@@ -2,18 +2,26 @@
 
 This skill is an integration of `Twig` into Jarvis micro-framework.
 
+## What it brings
+
+When this skill is enabled, it brings:
+
+- `$app['twig']` service, an unique instance of `\Twig_Environment`.
+- On `$app['twig']` first call, the event `Jarvis\Skill\Twig\TwigReadyEvent` (event name: `twig.ready`) will be broadcasted. Note that `TwigReadyEvent` is a permanent event.
+- In all Twig templates, the variable `router` (=`$app['router']`) is available.
+
 ## Configuration options
 
-To pass options to Twig you must add a 'twig' key in the 'extra' section:
+You must add a 'twig' key in the 'extra' section to pass your options:
 
 ```php
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$jarvis = new Jarvis\Jarvis([
+$app = new Jarvis\Jarvis([
     'providers' => [
-        'Jarvis\Skill\Twig\ContainerProvider',
+        'Jarvis\Skill\Twig\TwigCore',
     ],
     'extra' => [
         twig' => [
@@ -23,10 +31,10 @@ $jarvis = new Jarvis\Jarvis([
 ]);
 ```
 
-Note that `templates_paths` is a required parameter. This skill changes default values for some options:
+Note that `templates_paths` is a required parameter. Other options:
 
-- `debug`: if not provided, this value take the value of Jarvis `debug` parameter.
-- `auto_reload`: this is setted to `true` as default value in this skill.
-- `strict_variables`: this option is also setted to `true` by default.
+- `debug`: if not provided, Jarvis `debug` parameter is used.
+- `auto_reload`: `true` by default.
+- `strict_variables`: `true` by default.
 
 You can see complete options list on [Twig documentation](http://twig.sensiolabs.org/doc/api.html#environment-options).

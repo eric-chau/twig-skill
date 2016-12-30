@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jarvis\Skill\Twig;
 
 use Jarvis\Jarvis;
@@ -23,10 +25,17 @@ class TwigCore implements ContainerProviderInterface
             ], (array) ($app['twig.settings'] ?? []));
 
             if (!isset($settings['templates_paths'])) {
-                throw new \LogicException('Parameter `templates_paths` is missing to configure Twig.');
+                throw new \InvalidArgumentException(
+                    '"templates_paths" parameter is missing to configure Twig.'
+                );
             }
 
-            $twig = new \Twig_Environment(new \Twig_Loader_Filesystem($settings['templates_paths']), $settings);
+            $twig = new \Twig_Environment(
+                new \Twig_Loader_Filesystem($settings['templates_paths']),
+                $settings
+            );
+
+            $twig->addGlobal('router', $app['router']);
             $app->broadcast(TwigReadyEvent::READY_EVENT, new TwigReadyEvent($twig));
 
             return $twig;
