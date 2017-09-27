@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 use Jarvis\Skill\EventBroadcaster\PermanentEvent;
 use Jarvis\Skill\Twig\TwigReadyEvent;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Eric Chau <eriic.chau@gmail.com>
  */
-class TwigReadyEventTest extends \PHPUnit_Framework_TestCase
+class TwigReadyEventTest extends TestCase
 {
     public function test_is_permanent_event()
     {

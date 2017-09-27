@@ -5,11 +5,12 @@ declare(strict_types=1);
 use Jarvis\Jarvis;
 use Jarvis\Skill\Twig\TwigCore;
 use Jarvis\Skill\Twig\TwigReadyEvent;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Eric Chau <eriic.chau@gmail.com>
  */
-class TwigCoreTest extends \PHPUnit_Framework_TestCase
+class TwigCoreTest extends TestCase
 {
     public function test_twig_service(): void
     {

@@ -6,6 +6,7 @@ namespace Jarvis\Skill\Twig;
 
 use Jarvis\Jarvis;
 use Jarvis\Skill\DependencyInjection\ContainerProviderInterface;
+use Jarvis\Skill\Routing\Router;
 
 /**
  * @author Eric Chau <eriic.chau@gmail.com>
@@ -35,7 +36,7 @@ class TwigCore implements ContainerProviderInterface
                 $settings
             );
 
-            $twig->addGlobal('router', $app['router']);
+            $twig->addGlobal('router', $app[Router::class]);
             $app->broadcast(TwigReadyEvent::READY_EVENT, new TwigReadyEvent($twig));
 
             return $twig;
